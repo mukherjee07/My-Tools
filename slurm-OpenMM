@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --output=Grom3_with_no_constraints.out
+#SBATCH --error=Grom.err
+#SBATCH --job-name=NTCDA10_Li1
+#SBATCH --time=20:00:00 
+#SBATCH --clusters=chemistry
+##SBATCH --clusters=ub-skylake 
+#SBATCH --partition=beta --qos=beta
+##SBATCH --partition=general-compute
+#SBATCH --account=hachmann
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+##SBATCH --cluster=CHEMISTRY
+#SBATCH --constraint="CPU-E5-2630v3"
+##SBATCH --exclude=cpn-p25-18,cpn-p25-19
+##SBATCH --exclusive
+
+
+module load openmm/7.1.1-cpu
+module list
+python simulateAmber.py 
+
+

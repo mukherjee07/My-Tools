@@ -1,0 +1,139 @@
+#!/bin/bash
+#SBATCH --output=Orca.out
+#SBATCH --error=Orca.err
+#SBATCH --job-name=BASEDIR
+#SBATCH --time=72:00:00 
+##SBATCH --clusters=chemistry
+#SBATCH --clusters=ub-hpc 
+##SBATCH --partition=beta --qos=beta
+#SBATCH --partition=general-compute --qos=general-compute
+##SBATCH --account=hachmann
+#SBATCH --nodes=16
+#SBATCH --tasks-per-node=4
+##SBATCH --exclude=cpn-u25-33,cpn-u23-25,cpn-u23-26,cpn-u24-23,cpn-u24-28
+##SBATCH --cluster=CHEMISTRY
+##SBATCH --constraint="CPU-E5-2650v4"
+#SBATCH --exclude=cpn-d07-07-01,cpn-d09-20-02,cpn-d09-25-02,cpn-d14-38,cpn-d15-39,cpn-d07-09-01,cpn-d07-16-01,cpn-d09-15-01,cpn-d09-16-01,cpn-d09-20-01,cpn-d09-27-01,cpn-d14-35,cpn-d14-39,cpn-d15-21,cpn-d15-22,cpn-d15-23,cpn-d15-24,cpn-d15-31,cpn-d15-35,cpn-d15-36,cpn-d15-37,cpn-d15-38,cpn-d09-28-01,cpn-d14-02,cpn-d14-03,cpn-d14-04,cpn-d14-07,cpn-d14-08,cpn-d14-09,cpn-d14-10,cpn-d14-11,cpn-d14-13,cpn-d14-14,cpn-d14-15,cpn-d14-17,cpn-d14-20,cpn-d14-22,cpn-d15-01,cpn-d16-24,cpn-d16-27,cpn-d16-28,cpn-d16-29,cpn-d16-32,cpn-d16-35,cpn-d16-36,cpn-d16-37,cpn-d15-04,cpn-d15-05,cpn-d15-07,cpn-d15-08,cpn-d15-09,cpn-d15-10,cpn-d15-11,cpn-d15-12,cpn-d15-14,cpn-d15-15,cpn-d15-16,cpn-d15-17,cpn-d15-19,cpn-d16-02,cpn-d16-03,cpn-d16-05,cpn-d16-10,cpn-d16-11,cpn-d16-12,cpn-d16-13,cpn-d16-14,cpn-d16-15,cpn-d07-16-02,cpn-d07-18-01,cpn-d07-25-01,cpn-d07-27-01,cpn-d07-27-02,cpn-d07-28-01,cpn-d07-28-02,cpn-d07-33-01,cpn-d07-37-01,cpn-d07-38-02,cpn-d07-39-02,cpn-d07-40-01,cpn-d07-40-02,cpn-d09-04-01,cpn-d09-07-01,cpn-d09-09-01,cpn-d09-09-02,cpn-d09-13-01,cpn-d09-13-02,cpn-d09-14-01,cpn-d16-17,cpn-d16-18,cpn-d16-19,cpn-d16-21,cpn-k07-12-02,cpn-k07-13-01,cpn-k07-13-02,cpn-k08-02-01,cpn-k08-02-02,cpn-k08-05-01,cpn-k08-06-02,cpn-k08-07-02,cpn-k08-08-01,cpn-k08-13-02,cpn-k08-14-02,cpn-k08-15-01,cpn-k08-15-02,cpn-k08-16-02,cpn-k08-17-02,cpn-k08-18-01,cpn-k08-18-02,cpn-k08-19-01,cpn-k08-23-01,cpn-k08-23-02,cpn-k08-30-01,cpn-k08-30-02,cpn-k08-37-01,cpn-k08-38-01,cpn-k08-39-02,cpn-k10-02-02,cpn-k10-03-01,cpn-k10-05-02,cpn-k10-06-01,cpn-k10-06-02,cpn-k10-07-02,cpn-k10-08-01,cpn-k10-13-01,cpn-k10-13-02,cpn-k10-16-01,cpn-k10-17-01,cpn-k10-17-02,cpn-k10-18-02,cpn-k10-19-01,cpn-k10-23-01,cpn-k10-23-02,cpn-k10-24-01,cpn-k10-24-02,cpn-k10-25-01,cpn-k10-26-02,cpn-k14-15-02,cpn-k14-23-02,cpn-k14-24-02,cpn-k14-35-02,cpn-k14-39-01,cpn-k14-40-01,cpn-k14-40-02,cpn-k14-41-01,cpn-k16-01-01,cpn-k16-01-02,cpn-k16-02-02,cpn-k16-03-01,cpn-k16-04-02,cpn-k16-05-01,cpn-k16-05-02,cpn-k16-06-01,cpn-k16-06-02,cpn-k16-08-01,cpn-k16-13-01,cpn-k16-14-01,cpn-k16-15-02,cpn-k16-17-02,cpn-k16-19-01,cpn-k16-23-01,cpn-k16-23-02,cpn-k16-24-01,cpn-k16-25-02,cpn-k16-27-02,cpn-k16-28-01,cpn-k16-28-02,cpn-f16-04,cpn-f16-05,cpn-k16-29-02,cpn-k16-30-01,cpn-k16-30-02,cpn-k16-34-02,cpn-k16-35-01,cpn-k16-35-02,cpn-k16-37-01,cpn-k16-38-01,cpn-k16-38-02,cpn-k16-39-01,cpn-k16-39-02,cpn-k16-40-02,cpn-d15-32,cpn-f16-07,cpn-f16-08,cpn-f16-09,cpn-f16-10,cpn-f16-11,cpn-f16-12,cpn-f16-13,cpn-f16-16,cpn-f16-17,cpn-f16-18,cpn-d07-04-02,cpn-d07-09-02,cpn-d07-10-01,cpn-d07-13-01,cpn-d07-13-02,cpn-d07-14-02,cpn-f16-19,cpn-f16-23,cpn-f16-24,cpn-f16-25,cpn-f16-26,cpn-f16-27,cpn-f16-28,cpn-f16-30,cpn-f16-31,cpn-f16-33,cpn-f16-35,cpn-f16-36,cpn-f16-37,cpn-f16-39
+##SBATCH --constraint=cpn-d07-17-01,cpn-d07-24-02,cpn-d07-29-02,cpn-d07-35-02,cpn-d09-04-02,cpn-d09-05-02,cpn-d09-18-02,cpn-d09-25-01,cpn-d09-29-02,cpn-d09-38-02,cpn-d14-06,cpn-d14-12,cpn-d14-16,cpn-d14-18,cpn-d14-22,cpn-d14-38,cpn-d15-19,cpn-d16-03,cpn-d16-10,cpn-d16-16,cpn-d16-20,cpn-d16-40,cpn-d16-41,cpn-f16-04,cpn-f16-05,cpn-f16-06,cpn-k13-07-01,cpn-k13-08-01,cpn-k13-12-01,cpn-k14-26-02,cpn-k14-27-02,cpn-k14-36-02,cpn-k16-12-02
+
+cur_dir=$(pwd)
+cd //gpfs/scratch/kmukherj/GC_TEST/
+
+if [ -e BASEDIR ]; then
+rm -r BASEDIR
+fi 
+mkdir -p BASEDIR
+cd BASEDIR
+cp $cur_dir/inp_ut.inp ./
+cp $cur_dir/*.xyz ./
+
+INFILE=inp_ut.inp 
+
+if [ ! -f $INFILE ]; then
+  echo "Error! Input file does not exist (${INFILE})"
+  echo "Aborting the job..."
+  exit
+fi
+
+BASE=`basename $INFILE .inp`
+
+# a parallel version of the infile
+PINFILE=${BASE}.pin
+
+#construct nodefile, named as per Orca manual
+export SLURM_NODEFILE=${BASE}.nodes
+
+#use analogous naming convention for rankfile
+export ORCA_RANKFILE=${BASE}.ranks
+
+tic=`date +%s`
+echo "Start Time = "`date`
+
+# load modules
+echo "Loading modules ..."
+module load openmpi/gcc-4.8.3/1.6.5
+module load orca
+export NBOEXE=/util/academic/nbo/nbo6/bin/nbo6.i4.exe
+module load nbo/6
+module list
+ulimit -s unlimited
+
+# disable PSM interface if the nodes have Mellanox hardware
+bMLX=`/usr/sbin/ibstat | head -n1 | grep mlx | wc -l`
+if [ "$bMLX" == "1" ]; then
+  export OMPI_MCA_mtl=^psm
+fi
+
+# change to working directory
+#cd $SLURM_SUBMIT_DIR
+
+echo "%pal nprocs $SLURM_NPROCS end" > $PINFILE
+cat $INFILE | grep -v "^%pal nprocs" >> $PINFILE
+
+echo "Launching orca ..."
+echo "SLURM job ID         = "$SLURM_JOB_ID
+echo "Working Dir          = "$SLURM_SUBMIT_DIR
+echo "Compute Nodes        = "`nodeset -e $SLURM_NODELIST`
+echo "Number of Processors = "$SLURM_NPROCS
+echo "Number of Nodes      = "$SLURM_NNODES 
+echo "mpirun command       = "`which mpirun`
+echo "orca nodefile        = "$SLURM_NODEFILE
+echo "orca rankfile        = "$ORCA_RANKFILE
+
+echo " "
+echo "Input file"
+cat $PINFILE
+echo " "
+
+# create rank file to explicitly bind cores
+echo "creating hostfile and rankfile"
+uid=`id -u`
+jid=$SLURM_JOB_ID
+nodes=`nodeset -e $SLURM_NODELIST`
+
+# trigger creation of cpuset information and save to working dir
+srun bash -c "cat /cgroup/cpuset/slurm/uid_${uid}/job_${jid}/cpuset.cpus > cpus.\`hostname\`.$SLURM_JOB_ID"
+
+rm -f $ORCA_RANKFILE
+rm -f $SLURM_NODEFILE
+rank=0
+for i in ${nodes}; do
+  # extract space-separated list of assigned cpus
+  cpus=`cat cpus.${i}.${SLURM_JOB_ID}`
+  cpus=`nodeset -Re $cpus`
+  # add cpu assignments to the rank file
+  for j in ${cpus}; do
+    echo "rank ${rank}=$i slot=$j" >> $ORCA_RANKFILE
+    echo "$i" >> $SLURM_NODEFILE
+    rank=`expr $rank + 1`
+    if [ "$rank" == "$SLURM_NPROCS" ]; then
+      break;
+    fi
+  done
+  if [ "$rank" == "$SLURM_NPROCS" ]; then
+    break;
+  fi
+done
+
+# use ssh instead of slurm as the launcher
+# the rankfile that was just created will ensure cpusets are still honored.
+export OMPI_MCA_plm=rsh
+
+# launch application using mpirun
+echo "Launching application using mpirun"
+
+# launch application
+$ORCA_PATH/orca $PINFILE
+
+echo "All Done!"
+
+echo "End Time = "`date`
+toc=`date +%s`
+
+elapsedTime=`expr $toc - $tic`
+echo "Elapsed Time = $elapsedTime seconds"
+
+#copying back relavant files to current directory
+cp *.gbw $cur_dir/. 
+cp *.xyz $cur_dir/. 
+cp *.trj $cur_dir/.

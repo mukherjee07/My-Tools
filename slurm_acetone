@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --partition=beta --qos=beta
+#SBATCH --clusters=chemistry
+#SBATCH --account=hachmann
+#SBATCH --time=00:15:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --job-name="LAMMPS_TEST"
+#SBATCH --output=acetone1.out
+
+echo "SLURM_JOB_ID="$SLURM_JOB_ID
+echo "SLURM_JOB_NODELIST"=$SLURM_JOB_NODELIST
+echo "SLURM_NNODES"=$SLURM_NNODES
+echo "SLURMTMPDIR="$SLURMTMPDIR
+
+module load lammps/11Jan12
+module list
+ulimit -s unlimited
+NPROCS=`srun --nodes=${SLURM_NNODES} bash -c 'hostname' |wc -l`
+echo NPROCS=$NPROCS
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+srun -n $NPROCS lmp_linux -log log.acetone1  < in.acetone
+echo "All Done!"

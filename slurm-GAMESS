@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --output=gamess.out
+#SBATCH --error=gamess.err
+#SBATCH --job-name=GAMESS
+#SBATCH --time=72:00:00 
+#SBATCH --clusters=chemistry
+##SBATCH --clusters=ub-hpc 
+#SBATCH --partition=beta --qos=beta
+##SBATCH --partition=skylake --qos=skylake
+#SBATCH --account=hachmann
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=16
+##SBATCH --exclude=cpn-u25-33,cpn-u23-25,cpn-u23-26,cpn-u24-23,cpn-u24-28
+##SBATCH --cluster=CHEMISTRY
+##SBATCH --constraint="CPU-E5-2650v4"
+
+
+module load gamess/11Nov2017R3
+
+rungms Methane.inp
+
